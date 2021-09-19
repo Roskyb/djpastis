@@ -25,12 +25,11 @@ class ExtendedClient extends Client {
 
         const commandPath = path.join(__dirname, "..", "Commands");
         readdirSync(commandPath).forEach(dir => {
-            const commands = readdirSync(`${commandPath}/${dir}`).filter((file) => file.endsWith('.ts'))
-
+            const commands = readdirSync(`${commandPath}/${dir}`)
             for (const file of commands) {
                 const {command} = require(`${commandPath}/${dir}/${file}`)
                 this.commands.set(command.name, command)
-
+               
                 if(command?.aliases.legth !== 0){
                     command.aliases.forEach((alias: any) => {
                         this.aliases.set(alias, command)
@@ -76,12 +75,6 @@ class ExtendedClient extends Client {
             .on('error', (error: any) => console.log(error))
             queue?.textChannel.send(`Currently playing ${song.name}`)
         
-
-        // let stream = ytdl(args.join(" "))
-        // let dispatcher = connection?.play(stream
-        // ).on("finish",async () => {
-        //     await voiceChannel?.leave()
-        // })
     }
 }
 
