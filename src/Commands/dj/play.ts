@@ -2,6 +2,9 @@ import { Command } from "../../Interfaces/Commands";
 import ytdl from "ytdl-core";
 import { QueveConstruct } from "../../Interfaces/QueveConstruct";
 import { Channel, TextChannel } from "discord.js";
+import { url } from "inspector";
+import ytsr from "ytsr";
+import { isValidUrl } from "../../Utils/Utils";
 
 export const command: Command = {
     name: 'play',
@@ -9,9 +12,17 @@ export const command: Command = {
     run: async (client, message, args) => {
         let serverQueue = client.serverQueue
         try {
+            let arg = args.join(" ");
+            if(!isValidUrl(arg)) {
+                const search = await ytsr(arg,  { pages: 1 });
+                let item: any = search.items[0];
+                arg = item.url;
+            } 
 
+            
 
-            const songInfo = await ytdl.getInfo(args.join(" "))
+            const songInfo = await ytdl.getInfo(arg)
+            
             const song: Song = {
                 name: songInfo.videoDetails.title,
                 url: songInfo.videoDetails.video_url

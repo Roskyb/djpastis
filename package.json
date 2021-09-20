@@ -9,7 +9,9 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.4.0",
     "fluent-ffmpeg": "^2.1.2",
-    "ytdl-core": "^4.9.1"
+    "ytdl-core": "^4.9.1",
+    "ytpl": "^2.2.3",
+    "ytsr": "^3.5.3"
   },
   "devDependencies": {
     "@types/node": "^13.5.0",
@@ -21,7 +23,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start" : "npm run build && node ./dist/",
+    "start": "npm run build && node ./dist/",
     "dev": "ts-node-dev --respawn --transpile-only --poll ./src/index.ts"
   },
   "author": "",
